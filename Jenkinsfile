@@ -10,7 +10,7 @@ pipeline{
             steps{
                 withDockerRegistry(credentialsId: 'dockerhub', url: 'https://index.docker.io/v1/'){
                     sh 'docker build -t minhnc/hello-image:v1 .'
-                    sh 'docker build -t minhnc/hello-image:v1 .'
+                    sh 'docker push'
                 }
             }
         }
