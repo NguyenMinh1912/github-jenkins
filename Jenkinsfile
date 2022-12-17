@@ -8,7 +8,7 @@ pipeline{
         }
         stage("Build and push docker image"){
             steps{
-                withDockerRegistry(credentialsId: 'dockerhub', url: 'https://index.docker.io/v2/'){
+                withDockerRegistry(credentialsId: 'dockerhub', url: 'https://index.docker.io/v1/'){
                     sh 'docker build -t minhnc/hello-image:v1 .'
                     sh 'docker build -t minhnc/hello-image:v1 .'
                 }
