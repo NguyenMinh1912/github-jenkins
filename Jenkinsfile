@@ -12,24 +12,12 @@ pipeline {
             }
         } 
         stage('Building our image') { 
-            steps { 
-                script { 
-                    dockerImage = docker.build registry + ":v1" 
-                }
-            } 
+               app = docker.build("getintodevops/hellonode")
         }
         stage('Deploy our image') { 
-            steps { 
-                script { 
-                    docker.withRegistry( '', registryCredential ) { 
-                        dockerImage.push() 
-                    }
-                } 
-            }
-        } 
-        stage('Cleaning up') { 
-            steps { 
-                sh "docker rmi $registry:v1" 
+            docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
+                app.push("getintodevops/hellonode")
+                app.push("latest")
             }
         } 
     }
