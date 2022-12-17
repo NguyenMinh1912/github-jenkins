@@ -8,13 +8,18 @@ pipeline{
         }
 
         stage('Build image') {
-           dockerImage = docker.build("minhnc/hello-image:v1")
+            steps{
+               dockerImage = docker.build("minhnc/hello-image:v1")
+            }
         }
     
         stage('Push image') {
-            withDockerRegistry([ credentialsId: "dockerhub", url: "https://index.docker.io/v1/" ]) {
-                dockerImage.push()
+            steps{
+                withDockerRegistry([ credentialsId: "dockerhub", url: "https://index.docker.io/v1/" ]) {
+                    dockerImage.push()
+                }
             }
+           
         }    
             
         // stage("Build and push docker image"){
